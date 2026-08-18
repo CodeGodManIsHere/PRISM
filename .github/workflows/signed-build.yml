@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
+      - name: Ensure shell scripts are executable
+        run: chmod +x Scripts/*.sh
       - name: Validate secret configuration
         env:
           CERTIFICATE: ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_P12_BASE64 }}
