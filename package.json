@@ -1,0 +1,21 @@
+{
+  "name": "prism-safari",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local validation and deterministic tooling for PRISM",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "compile:filters": "node PrivacyEngine/Compiler/compile-rules.mjs --write",
+    "compile:check": "node PrivacyEngine/Compiler/compile-rules.mjs --check",
+    "lint:js": "node Scripts/check-javascript.mjs",
+    "validate": "node Scripts/validate-project.mjs && npm run compile:check",
+    "test": "node --test Tests/JavaScript/*.test.mjs",
+    "test:stress": "node --test Tests/Performance/*.test.mjs",
+    "benchmark": "node Scripts/run-benchmarks.mjs"
+  },
+  "license": "MIT"
+}
+

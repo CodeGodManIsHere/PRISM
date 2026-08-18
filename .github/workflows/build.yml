@@ -1,0 +1,97 @@
+name: Apple Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+  XCODEGEN_VERSION: 2.46.0
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.19.0
+          cache: npm
+      - name: Select stable Xcode
+        run: xcodebuild -version
+      - name: Validate source and XcodeGen paths
+        run: |
+          npm ci --ignore-scripts --offline
+          npm run lint:js
+          npm test
+          npm run validate
+          npm run test:stress
+      - name: Install pinned XcodeGen
+        run: |
+          brew install xcodegen
+          xcodegen --version | grep "$XCODEGEN_VERSION"
+      - name: Generate project
+        run: |
+          xcodegen generate
+          test -f PRISM.xcodeproj/project.pbxproj
+          xcodebuild -project PRISM.xcodeproj -list
+      - name: Boot an available iPhone simulator
+        id: simulator
+        run: |
+          simulator_id=$(Scripts/select-simulator.sh)
+          xcrun simctl boot "$simulator_id" 2>/dev/null || true
+          xcrun simctl bootstatus "$simulator_id" -b
+          echo "id=$simulator_id" >> "$GITHUB_OUTPUT"
+      - name: Build simulator app
+        run: |
+          xcodebuild \
+            -project PRISM.xcodeproj \
+            -scheme PRISM \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=${{ steps.simulator.outputs.id }}" \
+            -derivedDataPath Build/Simulator \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+          Scripts/verify-extension.sh Build/Simulator/Build/Products/Debug-iphonesimulator/PRISM.app
+      - name: Run XCTest
+        run: |
+          xcodebuild \
+            -project PRISM.xcodeproj \
+            -scheme PRISM \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=${{ steps.simulator.outputs.id }}" \
+            -derivedDataPath Build/Tests \
+            CODE_SIGNING_ALLOWED=NO \
+            test
+      - name: Build unsigned iphoneos app
+        run: |
+          xcodebuild \
+            -project PRISM.xcodeproj \
+            -scheme PRISM \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath Build/Device \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+          Scripts/verify-extension.sh Build/Device/Build/Products/Release-iphoneos/PRISM.app
+      - name: Package, extract, and verify unsigned IPA
+        run: |
+          Scripts/package-unsigned.sh \
+            Build/Device/Build/Products/Release-iphoneos/PRISM.app \
+            "$PWD/Build/Artifacts/PRISM-unsigned.ipa"
+          Scripts/verify-ipa.sh "$PWD/Build/Artifacts/PRISM-unsigned.ipa"
+          shasum -a 256 Build/Artifacts/PRISM-unsigned.ipa > Build/Artifacts/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PRISM-unsigned-${{ github.sha }}
+          path: |
+            Build/Artifacts/PRISM-unsigned.ipa
+            Build/Artifacts/SHA256SUMS
+          if-no-files-found: error

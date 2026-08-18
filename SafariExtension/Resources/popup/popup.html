@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>PRISM</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <h1>PRISM</h1>
+        <p id="domain">Checking this site…</p>
+      </div>
+    </header>
+
+    <section class="controls" aria-label="Site controls">
+      <label class="row">
+        <span><strong>Protection</strong><small>For this domain</small></span>
+        <input id="protection" type="checkbox" role="switch" disabled>
+      </label>
+
+      <label class="row select-row">
+        <span><strong>Dark Mode</strong><small>For this domain</small></span>
+        <select id="dark-mode" disabled>
+          <option value="automatic">Auto</option>
+          <option value="alwaysOn">On</option>
+          <option value="alwaysOff">Off</option>
+        </select>
+      </label>
+
+      <label class="row">
+        <span><strong>Clean URLs</strong><small>Known tracking parameters</small></span>
+        <input id="clean-urls" type="checkbox" role="switch" disabled>
+      </label>
+    </section>
+
+    <div class="actions">
+      <button id="block-element" class="secondary" type="button" disabled>Block Element</button>
+      <button id="reload" class="secondary" type="button" disabled>Reload Page</button>
+    </div>
+    <p id="status" role="status" aria-live="polite">Waiting for Safari access…</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

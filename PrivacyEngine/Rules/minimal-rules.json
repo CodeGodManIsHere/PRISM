@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "id": "prism_minimal",
+  "version": "bundled-1",
+  "license": "MIT",
+  "source": "PRISM contributors",
+  "rules": [
+    {
+      "pattern": "||doubleclick.net^",
+      "action": "block",
+      "category": "advertising",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest", "ping"]
+    },
+    {
+      "pattern": "||googlesyndication.com^",
+      "action": "block",
+      "category": "advertising",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||googleadservices.com^",
+      "action": "block",
+      "category": "advertising",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest", "ping"]
+    },
+    {
+      "pattern": "||adservice.google.com^",
+      "action": "block",
+      "category": "advertising",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest", "ping"]
+    },
+    {
+      "pattern": "||taboola.com^",
+      "action": "block",
+      "category": "advertising",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||outbrain.com^",
+      "action": "block",
+      "category": "advertising",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    }
+  ]
+}
+

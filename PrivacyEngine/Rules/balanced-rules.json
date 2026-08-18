@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "prism_balanced",
+  "version": "bundled-1",
+  "license": "MIT",
+  "source": "PRISM contributors",
+  "rules": [
+    {
+      "pattern": "||google-analytics.com^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "ping"]
+    },
+    {
+      "pattern": "||analytics.google.com^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "ping"]
+    },
+    {
+      "pattern": "||hotjar.com^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "websocket"]
+    },
+    {
+      "pattern": "||clarity.ms^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||mixpanel.com^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||amplitude.com^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||segment.io^",
+      "action": "block",
+      "category": "analytics",
+      "resourceTypes": ["script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||scorecardresearch.com^",
+      "action": "block",
+      "category": "tracking",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "ping"]
+    },
+    {
+      "pattern": "||quantserve.com^",
+      "action": "block",
+      "category": "tracking",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "ping"]
+    }
+  ]
+}
+

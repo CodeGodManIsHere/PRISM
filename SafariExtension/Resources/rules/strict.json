@@ -1,0 +1,82 @@
+[
+  {
+    "id": 10390,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||connect.facebook.net^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "sub_frame",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 110351,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||bat.bing.com^",
+      "resourceTypes": [
+        "image",
+        "ping",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 461095,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||sharethis.com^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "sub_frame",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 548745,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||addthis.com^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "sub_frame",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 976754,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||platform.twitter.com^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "sub_frame",
+        "xmlhttprequest"
+      ]
+    }
+  }
+]

@@ -1,0 +1,383 @@
+{
+  "name": "PRISM",
+  "options": {
+    "minimumXcodeGenVersion": "2.46.0",
+    "bundleIdPrefix": "com.prism.privacy",
+    "deploymentTarget": {
+      "iOS": "18.0"
+    },
+    "createIntermediateGroups": true,
+    "groupSortPosition": "top"
+  },
+  "configs": {
+    "Debug": "debug",
+    "Release": "release"
+  },
+  "settings": {
+    "base": {
+      "SWIFT_VERSION": "6.0",
+      "SWIFT_STRICT_CONCURRENCY": "complete",
+      "IPHONEOS_DEPLOYMENT_TARGET": "18.0",
+      "TARGETED_DEVICE_FAMILY": "1,2",
+      "CURRENT_PROJECT_VERSION": "1",
+      "MARKETING_VERSION": "0.1.0",
+      "CODE_SIGN_STYLE": "Automatic",
+      "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
+      "CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED": "YES",
+      "GCC_TREAT_WARNINGS_AS_ERRORS": "YES",
+      "SWIFT_TREAT_WARNINGS_AS_ERRORS": "YES"
+    }
+  },
+  "targets": {
+    "PRISM": {
+      "type": "application",
+      "platform": "iOS",
+      "sources": [
+        {
+          "path": "App",
+          "excludes": [
+            "Info.plist",
+            "Entitlements"
+          ]
+        },
+        {
+          "path": "Shared"
+        }
+      ],
+      "settings": {
+        "base": {
+          "PRODUCT_BUNDLE_IDENTIFIER": "com.prism.privacy",
+          "PRODUCT_NAME": "PRISM",
+          "INFOPLIST_FILE": "App/Info.plist",
+          "GENERATE_INFOPLIST_FILE": "NO",
+          "CODE_SIGN_ENTITLEMENTS": "App/Entitlements/PRISM.entitlements",
+          "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
+          "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
+          "SUPPORTS_MACCATALYST": "NO"
+        }
+      },
+      "dependencies": [
+        {
+          "target": "PRISMSafariExtension",
+          "embed": true
+        }
+      ]
+    },
+    "PRISMSafariExtension": {
+      "type": "app-extension",
+      "platform": "iOS",
+      "sources": [
+        {
+          "path": "SafariExtension/SafariWebExtensionHandler.swift"
+        },
+        {
+          "path": "Shared"
+        },
+        {
+          "path": "SafariExtension/Resources/manifest.json",
+          "type": "file",
+          "buildPhase": "resources"
+        },
+        {
+          "path": "SafariExtension/Resources/background/background.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "background"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/content/content-script.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "content"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/content/element-picker.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "content"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/icons/prism.svg",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "icons"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/popup/popup.css",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "popup"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/popup/popup.html",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "popup"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/popup/popup.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "popup"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/rules/balanced.json",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "rules"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/rules/minimal.json",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "rules"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/rules/strict.json",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "rules"
+            }
+          }
+        },
+        {
+          "path": "SafariExtension/Resources/shared/protocol.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "shared"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Compiler/compile-rules.mjs",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Compiler"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Compiler/custom-rule-compiler.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Compiler"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Models/settings-resolution.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Models"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Parser/filter-parser.mjs",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Parser"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Rules/balanced-rules.json",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Rules"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Rules/minimal-rules.json",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Rules"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Rules/strict-rules.json",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Rules"
+            }
+          }
+        },
+        {
+          "path": "PrivacyEngine/Sanitizer/url-sanitizer.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "PrivacyEngine/Sanitizer"
+            }
+          }
+        },
+        {
+          "path": "DarkModeEngine/Analyzer/native-dark.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "DarkModeEngine/Analyzer"
+            }
+          }
+        },
+        {
+          "path": "DarkModeEngine/Color/color-science.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "DarkModeEngine/Color"
+            }
+          }
+        },
+        {
+          "path": "DarkModeEngine/Mutation/mutation-queue.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "DarkModeEngine/Mutation"
+            }
+          }
+        },
+        {
+          "path": "DarkModeEngine/SiteFixes/site-fixes.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "DarkModeEngine/SiteFixes"
+            }
+          }
+        },
+        {
+          "path": "DarkModeEngine/Transformer/dark-engine.js",
+          "type": "file",
+          "buildPhase": {
+            "copyFiles": {
+              "destination": "resources",
+              "subpath": "DarkModeEngine/Transformer"
+            }
+          }
+        }
+      ],
+      "settings": {
+        "base": {
+          "PRODUCT_BUNDLE_IDENTIFIER": "com.prism.privacy.extension",
+          "PRODUCT_NAME": "PRISMSafariExtension",
+          "INFOPLIST_FILE": "SafariExtension/Info.plist",
+          "GENERATE_INFOPLIST_FILE": "NO",
+          "CODE_SIGN_ENTITLEMENTS": "SafariExtension/Entitlements/PRISMSafariExtension.entitlements",
+          "APPLICATION_EXTENSION_API_ONLY": "YES",
+          "SKIP_INSTALL": "YES",
+          "SUPPORTS_MACCATALYST": "NO"
+        }
+      }
+    },
+    "PRISMTests": {
+      "type": "bundle.unit-test",
+      "platform": "iOS",
+      "sources": [
+        {
+          "path": "Tests/Swift"
+        }
+      ],
+      "settings": {
+        "base": {
+          "PRODUCT_BUNDLE_IDENTIFIER": "com.prism.privacy.tests",
+          "GENERATE_INFOPLIST_FILE": "YES"
+        }
+      },
+      "dependencies": [
+        {
+          "target": "PRISM"
+        }
+      ]
+    }
+  },
+  "schemes": {
+    "PRISM": {
+      "build": {
+        "targets": {
+          "PRISM": "all",
+          "PRISMTests": [
+            "test"
+          ]
+        }
+      },
+      "run": {
+        "config": "Debug"
+      },
+      "test": {
+        "config": "Debug",
+        "gatherCoverageData": true,
+        "targets": [
+          {
+            "name": "PRISMTests"
+          }
+        ]
+      },
+      "archive": {
+        "config": "Release"
+      }
+    }
+  }
+}

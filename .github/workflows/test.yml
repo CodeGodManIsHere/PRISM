@@ -1,0 +1,43 @@
+name: Apple Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+  XCODEGEN_VERSION: 2.46.0
+
+jobs:
+  swift-tests:
+    runs-on: macos-26
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          brew install xcodegen
+          xcodegen --version | grep "$XCODEGEN_VERSION"
+          xcodegen generate
+      - name: Boot an available iPhone simulator
+        id: simulator
+        run: |
+          simulator_id=$(Scripts/select-simulator.sh)
+          xcrun simctl boot "$simulator_id" 2>/dev/null || true
+          xcrun simctl bootstatus "$simulator_id" -b
+          echo "id=$simulator_id" >> "$GITHUB_OUTPUT"
+      - name: Run XCTest
+        run: |
+          xcodebuild \
+            -project PRISM.xcodeproj \
+            -scheme PRISM \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=${{ steps.simulator.outputs.id }}" \
+            -derivedDataPath Build/Tests \
+            CODE_SIGNING_ALLOWED=NO \
+            test
+

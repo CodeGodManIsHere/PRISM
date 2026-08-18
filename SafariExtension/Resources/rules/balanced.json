@@ -1,0 +1,142 @@
+[
+  {
+    "id": 49037,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||hotjar.com^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "websocket",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 337103,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||analytics.google.com^",
+      "resourceTypes": [
+        "image",
+        "ping",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 458301,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||scorecardresearch.com^",
+      "resourceTypes": [
+        "image",
+        "ping",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 482004,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||quantserve.com^",
+      "resourceTypes": [
+        "image",
+        "ping",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 535002,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||segment.io^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 605839,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||amplitude.com^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 813548,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||google-analytics.com^",
+      "resourceTypes": [
+        "image",
+        "ping",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 910282,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||mixpanel.com^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  },
+  {
+    "id": 981529,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||clarity.ms^",
+      "resourceTypes": [
+        "image",
+        "script",
+        "xmlhttprequest"
+      ]
+    }
+  }
+]

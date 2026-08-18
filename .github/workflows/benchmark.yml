@@ -1,0 +1,29 @@
+name: Deterministic Benchmarks
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  node-benchmarks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24.19.0
+          cache: npm
+      - run: npm ci --ignore-scripts --offline
+      - run: npm run test:stress
+      - run: npm run benchmark
+      - uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-${{ github.sha }}
+          path: benchmark-results.json
+          if-no-files-found: error
+

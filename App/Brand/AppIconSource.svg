@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="25%" cy="15%" r="110%">
+      <stop stop-color="#263a70"/>
+      <stop offset="0.5" stop-color="#111a34"/>
+      <stop offset="1" stop-color="#090d1c"/>
+    </radialGradient>
+    <linearGradient id="prism" x1="210" y1="170" x2="850" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5ce3f4"/>
+      <stop offset="0.52" stop-color="#5682f2"/>
+      <stop offset="1" stop-color="#c169ee"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="480" y1="480" x2="900" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5ce3f4"/>
+      <stop offset="0.48" stop-color="#6f8df5"/>
+      <stop offset="1" stop-color="#d06be9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <circle cx="220" cy="180" r="260" fill="#49cbe3" opacity="0.08"/>
+  <circle cx="850" cy="870" r="330" fill="#a75ee6" opacity="0.1"/>
+  <path d="M510 178 830 800H194Z" fill="#101a32" stroke="url(#prism)" stroke-width="62" stroke-linejoin="round"/>
+  <path d="m464 491 407-128M485 545l399 38M469 600l343 214" fill="none" stroke="url(#beam)" stroke-width="42" stroke-linecap="round"/>
+  <path d="m128 475 332 38" fill="none" stroke="#eefcff" stroke-width="36" stroke-linecap="round" opacity="0.9"/>
+</svg>
+

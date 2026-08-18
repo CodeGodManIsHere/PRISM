@@ -1,0 +1,68 @@
+{
+  "manifest_version": 3,
+  "name": "PRISM",
+  "version": "0.1.0",
+  "description": "Local Safari privacy protection, cautious URL cleaning, and perceptual dark mode.",
+  "permissions": [
+    "activeTab",
+    "declarativeNetRequestWithHostAccess",
+    "nativeMessaging",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "action": {
+    "default_title": "PRISM",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/prism.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "shared/protocol.js",
+        "PrivacyEngine/Models/settings-resolution.js",
+        "PrivacyEngine/Sanitizer/url-sanitizer.js",
+        "DarkModeEngine/Color/color-science.js",
+        "DarkModeEngine/Analyzer/native-dark.js",
+        "DarkModeEngine/SiteFixes/site-fixes.js",
+        "DarkModeEngine/Mutation/mutation-queue.js",
+        "DarkModeEngine/Transformer/dark-engine.js",
+        "content/element-picker.js",
+        "content/content-script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "prism_minimal",
+        "enabled": true,
+        "path": "rules/minimal.json"
+      },
+      {
+        "id": "prism_balanced",
+        "enabled": true,
+        "path": "rules/balanced.json"
+      },
+      {
+        "id": "prism_strict",
+        "enabled": false,
+        "path": "rules/strict.json"
+      }
+    ]
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  }
+}

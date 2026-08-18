@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "prism_strict",
+  "version": "bundled-1",
+  "license": "MIT",
+  "source": "PRISM contributors",
+  "rules": [
+    {
+      "pattern": "||connect.facebook.net^",
+      "action": "block",
+      "category": "social",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||platform.twitter.com^",
+      "action": "block",
+      "category": "social",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||addthis.com^",
+      "action": "block",
+      "category": "social",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||sharethis.com^",
+      "action": "block",
+      "category": "social",
+      "resourceTypes": ["sub_frame", "script", "image", "xmlhttprequest"]
+    },
+    {
+      "pattern": "||bat.bing.com^",
+      "action": "block",
+      "category": "tracking",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "ping"]
+    }
+  ]
+}
+

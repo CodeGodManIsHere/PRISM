@@ -1,0 +1,49 @@
+name: Source and Unsigned Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+  XCODEGEN_VERSION: 2.46.0
+
+jobs:
+  release:
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          brew install xcodegen
+          xcodegen --version | grep "$XCODEGEN_VERSION"
+          xcodegen generate
+      - name: Build verified unsigned package
+        run: |
+          xcodebuild \
+            -project PRISM.xcodeproj \
+            -scheme PRISM \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath Build/Release \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+          Scripts/package-unsigned.sh \
+            Build/Release/Build/Products/Release-iphoneos/PRISM.app \
+            "$PWD/Build/Artifacts/PRISM-${GITHUB_REF_NAME}-unsigned.ipa"
+          git archive --format=zip --output="Build/Artifacts/PRISM-${GITHUB_REF_NAME}-source.zip" HEAD
+          (cd Build/Artifacts && shasum -a 256 *.ipa *.zip > SHA256SUMS)
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            Build/Artifacts/* \
+            --verify-tag \
+            --generate-notes \
+            --title "PRISM $GITHUB_REF_NAME"
+

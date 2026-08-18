@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Fixture — dynamic SPA</title><style>body{background:#fff;color:#161616}.item{background:#f4f4f4;margin:4px;padding:8px}</style></head>
+<body>
+  <button id="route">Simulate route</button><main id="feed"></main>
+  <script>
+    const feed = document.querySelector("#feed");
+    document.querySelector("#route").addEventListener("click", () => {
+      history.pushState({}, "", `/fixture/${Date.now()}`);
+      const fragment = document.createDocumentFragment();
+      for (let index = 0; index < 1000; index += 1) {
+        const item = document.createElement("div");
+        item.className = "item";
+        item.textContent = `Dynamic item ${index}`;
+        fragment.append(item);
+      }
+      feed.replaceChildren(fragment);
+    });
+  </script>
+</body>
+</html>
+
