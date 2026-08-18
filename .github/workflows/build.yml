@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v5
+      - name: Ensure shell scripts are executable
+        run: chmod +x Scripts/*.sh
       - uses: actions/setup-node@v5
         with:
           node-version: 24.19.0
