@@ -238,9 +238,9 @@ enum ProfileResolver {
     private static func defaultProtection(for global: GlobalSettings) -> ProtectionMode {
         guard global.protectionEnabled else { return .disabled }
         switch global.protectionPreset {
-        case .balanced, .custom: .balanced
-        case .strict: .strict
-        case .minimal: .minimal
+        case .balanced, .custom: return .balanced
+        case .strict: return .strict
+        case .minimal: return .minimal
         }
     }
 }
