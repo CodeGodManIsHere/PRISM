@@ -18,6 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: |
+          brew untap aws/tap 2>/dev/null || true
           brew install xcodegen
           xcodegen --version | grep "$XCODEGEN_VERSION"
           xcodegen generate
@@ -46,4 +47,3 @@ jobs:
             --verify-tag \
             --generate-notes \
             --title "PRISM $GITHUB_REF_NAME"
-
