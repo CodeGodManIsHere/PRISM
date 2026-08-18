@@ -34,6 +34,7 @@ jobs:
           npm run test:stress
       - name: Install pinned XcodeGen
         run: |
+          brew untap aws/tap 2>/dev/null || true
           brew install xcodegen
           xcodegen --version | grep "$XCODEGEN_VERSION"
       - name: Generate project
