@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct DashboardView: View {
     @EnvironmentObject private var model: AppModel
@@ -48,11 +49,15 @@ struct DashboardView: View {
                 if let error = model.lastError {
                     Label(error, systemImage: "exclamationmark.triangle.fill")
                         .foregroundStyle(.red)
-                        .accessibilityLiveRegion(.assertive)
+                        .accessibilityLabel("Error: \(error)")
                 }
             }
             .padding()
             .frame(maxWidth: 1_000, alignment: .leading)
+        }
+        .onChange(of: model.lastError) { _, newError in
+            guard let newError else { return }
+            UIAccessibility.post(notification: .announcement, argument: newError)
         }
         .background {
             LinearGradient(
